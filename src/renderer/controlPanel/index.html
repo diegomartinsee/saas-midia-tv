@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Mídia TV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot">○</span>
+                <span id="statusText">PAUSADO</span>
+            </div>
+            <div class="next-ad">
+                Próxima propaganda: <span id="nextAdTime">--:--</span>
+            </div>
+        </div>
+
+        <!-- Ads Section -->
+        <div class="section">
+            <h2>📁 SUAS PROPAGANDAS (<span id="adsCount">0</span>)</h2>
+
+            <!-- Drop Zone -->
+            <div class="drop-zone" id="dropZone">
+                <div class="drop-zone-content">
+                    <p>Arraste vídeos ou imagens aqui</p>
+                    <p>ou clique para escolher</p>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+            <!-- Ads List -->
+            <div class="ads-list" id="adsList">
+                <!-- Ads will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Frequency Section -->
+        <div class="section">
+            <h2>⏱️ FREQUÊNCIA</h2>
+            <p>Quantas vezes por hora mostrar propagandas?</p>
+
+            <div class="frequency-slider">
+                <div class="slider-labels">
+                    <span>Raramente</span>
+                    <span>Frequente</span>
+                </div>
+                <input type="range" id="frequencySlider" min="1" max="12" value="6" step="1">
+                <div class="slider-markers">
+                    <span>1x</span>
+                    <span>6x</span>
+                    <span>12x</span>
+                </div>
+            </div>
+
+            <div class="frequency-preview">
+                <span id="frequencyPreview">📺 A cada 10 minutos</span>
+            </div>
+        </div>
+
+        <!-- Duration Section -->
+        <div class="section">
+            <h2>⏳ DURAÇÃO DAS IMAGENS</h2>
+            <p>Por quanto tempo cada imagem deve ser exibida?</p>
+
+            <div class="duration-slider">
+                <div class="slider-labels">
+                    <span>Curto</span>
+                    <span>Longo</span>
+                </div>
+                <input type="range" id="durationSlider" min="5" max="60" value="15" step="5">
+                <div class="slider-markers">
+                    <span>5s</span>
+                    <span>30s</span>
+                    <span>60s</span>
+                </div>
+            </div>
+
+            <div class="duration-preview">
+                <span id="durationPreview">⏱️ 15 segundos</span>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <div class="section">
+            <h2>🕐 HORÁRIO DE FUNCIONAMENTO</h2>
+
+            <div class="time-range">
+                <label>
+                    De:
+                    <select id="startHour">
+                        <!-- Options added by JS -->
+                    </select>
+                </label>
+                <label>
+                    Até:
+                    <select id="endHour">
+                        <!-- Options added by JS -->
+                    </select>
+                </label>
+            </div>
+
+            <label class="checkbox-label">
+                <input type="checkbox" id="24hours">
+                <span>Funcionar 24 horas</span>
+            </label>
+
+            <div class="error-message" id="scheduleError" style="display: none;"></div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="action-section">
+            <button class="main-button" id="mainButton" disabled>
+                ▶ INICIAR SISTEMA
+            </button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>

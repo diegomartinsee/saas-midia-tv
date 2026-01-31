@@ -1,0 +1,24 @@
+{
+    "name": "saas-midia-tv",
+    "version": "1.0.0",
+    "description": "Sistema de overlay de propaganda para TV",
+    "main": "src/main/main.js",
+    "scripts": {
+        "start": "electron .",
+        "dev": "electron . --dev"
+    },
+    "keywords": [
+        "electron",
+        "overlay",
+        "ads",
+        "digital-signage"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^30.0.0"
+    },
+    "dependencies": {
+        "auto-launch": "^5.0.6"
+    }
+}
