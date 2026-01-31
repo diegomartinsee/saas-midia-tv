@@ -9,11 +9,11 @@ function createOverlayWindow() {
     const { width, height } = primaryDisplay.bounds;
 
     const window = new BrowserWindow({
-        x: 0,
-        y: 0,
+        x: primaryDisplay.bounds.x,
+        y: primaryDisplay.bounds.y,
         width,
         height,
-        fullscreen: false,
+        fullscreen: true,
         frame: false,
         resizable: false,
         movable: false,

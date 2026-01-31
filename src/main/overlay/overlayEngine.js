@@ -41,6 +41,11 @@ class OverlayEngine {
         this.currentAdId = ad.id;
         this.transitionTo(STATES.PREPARING);
 
+        // Refresh bounds for current display
+        const { screen } = require('electron');
+        const primaryDisplay = screen.getPrimaryDisplay();
+        this.window.setBounds(primaryDisplay.bounds);
+
         // Ensure window is in standard state before showing
         if (this.window.isMinimized()) {
             this.window.restore();
@@ -72,6 +77,7 @@ class OverlayEngine {
             this.window.restore();
         }
 
+        this.window.setFullScreen(true);
         this.window.show();
         this.window.setAlwaysOnTop(true, 'screen-saver');
         this.window.focus();
@@ -124,23 +130,24 @@ class OverlayEngine {
             this.powerBlockerId = null;
         }
 
-        // 4. HIDE INSTANTLY (No delay, no 0.5 opacity)
+        // 4. HIDE INSTANTLY
         this.hide();
     }
 
+    /**
+     * Hide overlay
+     */
     hide() {
         this.transitionTo(STATES.HIDDEN);
 
-        // 1. FIRST: Drop all OS-level priorities
-        this.window.setAlwaysOnTop(false);
-        this.window.setIgnoreMouseEvents(true);
+        // 1. Drop FullScreen first to help OS re-render
+        this.window.setFullScreen(false);
 
-        // 2. SECOND: MINIMIZE window. 
-        // This is the "Alt-Tab" trick: it forces Windows to restore focus 
-        // to the previously active application immediately.
+        // 2. MINIMIZE window to force focus return (The "Alt-Tab" trick)
+        this.window.setIgnoreMouseEvents(true);
         this.window.minimize();
 
-        // 3. THIRD: Hide from OS entirely after a tiny delay to allow minimize to register
+        // 3. Hide from OS entirely after a tiny delay
         setTimeout(() => {
             this.window.hide();
             this.window.setOpacity(0);
